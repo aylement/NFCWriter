@@ -1,0 +1,37 @@
+﻿@page "/tags"
+@inject ITagStorageService TagStorageService
+
+<PageTitle>Stored NFC Tags</PageTitle>
+
+<h3>Stored NFC Tags</h3>
+
+@if (tags.Count == 0)
+{
+    <p><em>No tags saved yet.</em></p>
+}
+else
+{
+    <ul>
+        @foreach (var tag in tags)
+        {
+            <li>@tag</li>
+        }
+    </ul>
+}
+
+<button @onclick="ClearTags">Clear All</button>
+
+@code {
+    private List<string> tags = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        tags = await TagStorageService.LoadTagsAsync();
+    }
+
+    private async Task ClearTags()
+    {
+        await TagStorageService.ClearTagsAsync();
+        tags.Clear();
+    }
+}

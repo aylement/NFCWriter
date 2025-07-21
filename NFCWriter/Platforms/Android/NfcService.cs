@@ -18,7 +18,7 @@ public class NfcService : Java.Lang.Object, INfcService, NfcAdapter.IReaderCallb
         activity,
         this,
         NfcReaderFlags.NfcA,
-        null    
+        null
          );
     }
 

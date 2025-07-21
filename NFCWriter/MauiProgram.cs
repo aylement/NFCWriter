@@ -21,6 +21,7 @@ namespace NFCWriter
             builder.Services.AddSingleton<IFormFactor, FormFactor>();
 #if ANDROID
             builder.Services.AddSingleton<INfcService, NfcService>();
+            builder.Services.AddSingleton<ITagStorageService, TagStorageService>();
 #endif
             builder.Services.AddMauiBlazorWebView();
 

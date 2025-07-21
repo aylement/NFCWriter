@@ -1,6 +1,7 @@
 ﻿@page "/NFC"
 @using NFCWriter.Shared.Interfaces
 @inject INfcService NfcService
+@inject ITagStorageService TagStorage
 
 <PageTitle>NFC Tag Reader</PageTitle>
 
@@ -34,10 +35,12 @@
     {
         NfcService.TagRead += async (s, tag) =>
         {
+            await TagStorage.AddTagAsync(tag); // 👈 Add to file
             await InvokeAsync(() =>
             {
                 lastTag = tag;
-                statusMessage = "Tag read successfully";
+                statusMessage = "Tag read and saved.";
+                StateHasChanged();
             });
         };
     }
