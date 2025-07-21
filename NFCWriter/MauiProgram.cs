@@ -23,6 +23,10 @@ namespace NFCWriter
             builder.Services.AddSingleton<INfcService, NfcService>();
             builder.Services.AddSingleton<ITagStorageService, TagStorageService>();
 #endif
+
+#if IOS
+            builder.Services.AddSingleton<INfcService, NfcService>();
+#endif
             builder.Services.AddMauiBlazorWebView();
 
 #if DEBUG

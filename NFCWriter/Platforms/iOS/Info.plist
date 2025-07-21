@@ -28,5 +28,8 @@
     </array>
     <key>XSAppIconAssets</key>
     <string>Assets.xcassets/appicon.appiconset</string>
+	
+	<key>NFCReaderUsageDescription</key>
+	<string>This app uses NFC to read tags.</string>
 </dict>
 </plist>

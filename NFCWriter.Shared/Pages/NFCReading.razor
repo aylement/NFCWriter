@@ -35,7 +35,7 @@
     {
         NfcService.TagRead += async (s, tag) =>
         {
-            await TagStorage.AddTagAsync(tag); // 👈 Add to file
+            await TagStorage.AddTagAsync(tag);
             await InvokeAsync(() =>
             {
                 lastTag = tag;
