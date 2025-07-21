@@ -1,0 +1,66 @@
+/* wwwroot/nfc.css */
+
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.card {
+    background-color: #f0f4f8;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+h2 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.status {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: #555;
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.read-btn,
+.stop-btn {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.read-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.stop-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+    .read-btn:disabled,
+    .stop-btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+.reading-indicator {
+    margin-top: 1rem;
+    text-align: center;
+    font-style: italic;
+    color: #666;
+}

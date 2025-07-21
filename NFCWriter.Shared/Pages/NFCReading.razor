@@ -1,0 +1,58 @@
+﻿@page "/NFC"
+@using NFCWriter.Shared.Interfaces
+@inject INfcService NfcService
+
+<PageTitle>NFC Tag Reader</PageTitle>
+
+<div class="container">
+    <div class="card">
+        <h2>NFC Tag Reader</h2>
+
+        <div class="status">
+            <p><strong>Status:</strong> @statusMessage</p>
+            <p><strong>Last Tag:</strong> @lastTag</p>
+        </div>
+
+        <div class="button-group">
+            <button class="read-btn" @onclick="StartReading" disabled="@isReading">📡 Start Reading</button>
+            <button class="stop-btn" @onclick="StopReading" disabled="@(isReading == false)">⛔ Stop</button>
+        </div>
+
+        @if (isReading)
+        {
+            <p class="reading-indicator">Listening for tags... 🔄</p>
+        }
+    </div>
+</div>
+
+@code {
+    string lastTag = "Waiting...";
+    string statusMessage = "Idle";
+    bool isReading = false;
+
+    protected override void OnInitialized()
+    {
+        NfcService.TagRead += async (s, tag) =>
+        {
+            await InvokeAsync(() =>
+            {
+                lastTag = tag;
+                statusMessage = "Tag read successfully";
+            });
+        };
+    }
+
+    void StartReading()
+    {
+        isReading = true;
+        statusMessage = "Reading...";
+        NfcService.StartListening();
+    }
+
+    void StopReading()
+    {
+        isReading = false;
+        statusMessage = "Stopped";
+        NfcService.StopListening();
+    }
+}
