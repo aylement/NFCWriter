@@ -1,0 +1,29 @@
+.touch-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.control-btn {
+    font-size: 32px;
+    padding: 20px;
+    min-width: 80px;
+    border-radius: 12px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease;
+}
+
+    .control-btn:active {
+        background-color: #388E3C;
+    }

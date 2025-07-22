@@ -5,20 +5,20 @@
 
 <canvas id="snakeCanvas" width="400" height="400" style="border:1px solid #ccc;"></canvas>
 
-<div class="touch-controls" style="margin-top: 1rem; text-align: center;">
-    <div>
-        <button @onclick="@(() => SetDirection("UP"))">⬆️</button>
+<div class="touch-controls">
+    <div class="row">
+        <button class="control-btn" @onclick="@(() => SetDirection("UP"))">⬆️</button>
     </div>
-    <div>
-        <button @onclick="@(() => SetDirection("LEFT"))">⬅️</button>
-        <button @onclick="@(() => SetDirection("RIGHT"))">➡️</button>
+    <div class="row">
+        <button class="control-btn" @onclick="@(() => SetDirection("LEFT"))">⬅️</button>
+        <button class="control-btn" @onclick="@(() => SetDirection("RIGHT"))">➡️</button>
     </div>
-    <div>
-        <button @onclick="@(() => SetDirection("DOWN"))">⬇️</button>
+    <div class="row">
+        <button class="control-btn" @onclick="@(() => SetDirection("DOWN"))">⬇️</button>
     </div>
-    <div style="margin-top: 1rem;">
-        <button @onclick="ResetGame">🔄 Reset Game</button>
-    </div>
+</div>
+<div style="margin-top: 1rem;">
+    <button @onclick="ResetGame">🔄 Reset Game</button>
 </div>
 
 @code {
@@ -32,7 +32,7 @@
 
     private async Task SetDirection(string dir)
     {
-        await JS.InvokeVoidAsync("setDirection", dir);
+        JS.InvokeVoidAsync("setDirection", dir);
     }
 
     private async Task ResetGame()
