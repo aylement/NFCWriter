@@ -1,0 +1,31 @@
+﻿@page "/NFCUnlock"
+@using NFCWriter.Shared.Interfaces
+@inject INfcService NfcService
+@inject NavigationManager Navigation
+
+<h3>🎮 Tap any NFC tag to start the game!</h3>
+<p><strong>Status:</strong> @status</p>
+
+@code {
+    string status = "Waiting for tag...";
+
+    protected override void OnInitialized()
+    {
+        NfcService.TagRead += async (s, tag) =>
+        {
+            await InvokeAsync(() =>
+            {
+                status = "✅ Tag read! Redirecting to Snake game...";
+                Navigation.NavigateTo("/Snake");
+                StateHasChanged();
+            });
+        };
+
+        NfcService.StartListening();
+    }
+
+    public void Dispose()
+    {
+        NfcService.StopListening();
+    }
+}

@@ -1,0 +1,42 @@
+﻿@page "/Snake"
+@inject IJSRuntime JS
+
+<h2>🐍 Snake Game</h2>
+
+<canvas id="snakeCanvas" width="400" height="400" style="border:1px solid #ccc;"></canvas>
+
+<div class="touch-controls" style="margin-top: 1rem; text-align: center;">
+    <div>
+        <button @onclick="@(() => SetDirection("UP"))">⬆️</button>
+    </div>
+    <div>
+        <button @onclick="@(() => SetDirection("LEFT"))">⬅️</button>
+        <button @onclick="@(() => SetDirection("RIGHT"))">➡️</button>
+    </div>
+    <div>
+        <button @onclick="@(() => SetDirection("DOWN"))">⬇️</button>
+    </div>
+    <div style="margin-top: 1rem;">
+        <button @onclick="ResetGame">🔄 Reset Game</button>
+    </div>
+</div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("startSnakeGame");
+        }
+    }
+
+    private async Task SetDirection(string dir)
+    {
+        await JS.InvokeVoidAsync("setDirection", dir);
+    }
+
+    private async Task ResetGame()
+    {
+        await JS.InvokeVoidAsync("resetSnakeGame");
+    }
+}
