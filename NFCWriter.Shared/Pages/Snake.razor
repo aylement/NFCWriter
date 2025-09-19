@@ -3,40 +3,49 @@
 
 <h2>🐍 Snake Game</h2>
 
-<canvas id="snakeCanvas" width="400" height="400" style="border:1px solid #ccc;"></canvas>
-
-<div class="touch-controls">
-    <div class="row">
-        <button class="control-btn" @onclick="@(() => SetDirection("UP"))">⬆️</button>
-    </div>
-    <div class="row">
-        <button class="control-btn" @onclick="@(() => SetDirection("LEFT"))">⬅️</button>
-        <button class="control-btn" @onclick="@(() => SetDirection("RIGHT"))">➡️</button>
-    </div>
-    <div class="row">
-        <button class="control-btn" @onclick="@(() => SetDirection("DOWN"))">⬇️</button>
-    </div>
+<div style="margin-top: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+	<div style="width: 150px; text-align: left;">
+		Speed: <span id="speedLabel">Zoomy 🐍</span>
+	</div>
+	<input type="range"
+		   id="speedSlider"
+		   min="50"
+		   max="400"
+		   step="50"
+		   value="100"
+		   oninput="updateSpeed(this.value)"
+		   style="flex: 1;" />
 </div>
-<div style="margin-top: 1rem;">
-    <button @onclick="ResetGame">🔄 Reset Game</button>
+
+<canvas id="snakeCanvas"
+		width="400"
+		height="400"
+		style="border:1px solid #ccc; width: 100%; max-width: 400px; height: auto; margin-top: 1rem;">
+</canvas>
+
+<div class="touch-controls-grid" style="margin-top: 1rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; justify-items: center;">
+	<button class="control-btn" id="btnUp">⬆️</button>
+	<button class="control-btn" id="btnLeft">⬅️</button>
+	<button class="control-btn" id="btnRight">➡️</button>
+	<button class="control-btn" id="btnDown">⬇️</button>
+</div>
+
+<div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+	<button @onclick="ResetGame">🔄 Reset Game</button>
+	<button onclick="togglePause()">⏸️ Pause / Resume</button>
 </div>
 
 @code {
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await JS.InvokeVoidAsync("startSnakeGame");
-        }
-    }
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			await JS.InvokeVoidAsync("startSnakeGame");
+		}
+	}
 
-    private async Task SetDirection(string dir)
-    {
-        JS.InvokeVoidAsync("setDirection", dir);
-    }
-
-    private async Task ResetGame()
-    {
-        await JS.InvokeVoidAsync("resetSnakeGame");
-    }
+	private async Task ResetGame()
+	{
+		await JS.InvokeVoidAsync("resetSnakeGame");
+	}
 }
