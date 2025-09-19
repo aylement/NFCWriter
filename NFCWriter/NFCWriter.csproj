@@ -70,4 +70,10 @@
     <ProjectReference Include="..\NFCWriter.Shared\NFCWriter.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Resources\Raw\incidents.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

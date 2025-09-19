@@ -33,16 +33,18 @@
 
     protected override void OnInitialized()
     {
-        NfcService.TagRead += async (s, tag) =>
+        NfcService.TagRead += OnTagRead;
+    }
+
+    private async void OnTagRead(object sender, string tag)
+    {
+        await TagStorage.AddTagAsync(tag);
+        await InvokeAsync(() =>
         {
-            await TagStorage.AddTagAsync(tag);
-            await InvokeAsync(() =>
-            {
-                lastTag = tag;
-                statusMessage = "Tag read and saved.";
-                StateHasChanged();
-            });
-        };
+            lastTag = tag;
+            statusMessage = "Tag read and saved.";
+            StateHasChanged();
+        });
     }
 
     void StartReading()
@@ -57,5 +59,15 @@
         isReading = false;
         statusMessage = "Stopped";
         NfcService.StopListening();
+    }
+
+    public void Dispose()
+    {
+        NfcService.TagRead -= OnTagRead;
+        if (isReading)
+        {
+            NfcService.StopListening();
+            isReading = false;
+        }
     }
 }

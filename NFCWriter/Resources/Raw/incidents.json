@@ -1,0 +1,417 @@
+[
+    {
+        "Id": 1,
+        "Description": "Printer not connecting to WiFi",
+        "Solution": "Restart printer and reconnect to WiFi"
+    },
+    {
+        "Id": 2,
+        "Description": "Email service is down",
+        "Solution": "Restart email server and check DNS settings"
+    },
+    {
+        "Id": 3,
+        "Description": "Laptop won't start",
+        "Solution": "Check power supply and hold power button for 10 seconds"
+    },
+    {
+        "Id": 4,
+        "Description": "Can't access shared folder",
+        "Solution": "Check network permissions and user access rights"
+    },
+    {
+        "Id": 5,
+        "Description": "Slow internet on floor 3",
+        "Solution": "Reset the floor 3 switch and check cable connections"
+    },
+    {
+        "Id": 6,
+        "Description": "Software installation fails",
+        "Solution": "Check permissions and disk space"
+    },
+    {
+        "Id": 7,
+        "Description": "Blue screen on startup",
+        "Solution": "Run system diagnostics and check for driver updates"
+    },
+    {
+        "Id": 8,
+        "Description": "Cannot print PDF files",
+        "Solution": "Update printer drivers and check file permissions"
+    },
+    {
+        "Id": 9,
+        "Description": "WiFi disconnects frequently",
+        "Solution": "Update router firmware and check interference sources"
+    },
+    {
+        "Id": 10,
+        "Description": "Email attachments not opening",
+        "Solution": "Scan for viruses and update email client"
+    },
+    {
+        "Id": 11,
+        "Description": "Computer overheating",
+        "Solution": "Clean fans and check for proper ventilation"
+    },
+    {
+        "Id": 12,
+        "Description": "Unable to connect to VPN",
+        "Solution": "Verify VPN credentials and server status"
+    },
+    {
+        "Id": 13,
+        "Description": "Keyboard not working",
+        "Solution": "Reconnect keyboard or try a different USB port"
+    },
+    {
+        "Id": 14,
+        "Description": "Mouse cursor freezing",
+        "Solution": "Update mouse drivers and check battery"
+    },
+    {
+        "Id": 15,
+        "Description": "Monitor flickering",
+        "Solution": "Check cable connections and update graphics drivers"
+    },
+    {
+        "Id": 16,
+        "Description": "Lost files after system crash",
+        "Solution": "Use file recovery software and restore backups"
+    },
+    {
+        "Id": 17,
+        "Description": "Unable to send emails",
+        "Solution": "Check SMTP server settings and network connection"
+    },
+    {
+        "Id": 18,
+        "Description": "Slow computer startup",
+        "Solution": "Disable unnecessary startup programs and run antivirus scan"
+    },
+    {
+        "Id": 19,
+        "Description": "Application crashes on launch",
+        "Solution": "Reinstall the application and update dependencies"
+    },
+    {
+        "Id": 20,
+        "Description": "Forgot Windows password",
+        "Solution": "Reset password using recovery options"
+    },
+    {
+        "Id": 21,
+        "Description": "Audio not working",
+        "Solution": "Check audio settings and update sound drivers"
+    },
+    {
+        "Id": 22,
+        "Description": "Unable to connect to printer",
+        "Solution": "Restart printer spooler service and reconnect printer"
+    },
+    {
+        "Id": 23,
+        "Description": "Screen resolution issues",
+        "Solution": "Adjust display settings and update graphics drivers"
+    },
+    {
+        "Id": 24,
+        "Description": "Pop-up ads appearing",
+        "Solution": "Run anti-malware scan and remove unwanted extensions"
+    },
+    {
+        "Id": 25,
+        "Description": "Network drive not mapping",
+        "Solution": "Verify network path and user permissions"
+    },
+    {
+        "Id": 26,
+        "Description": "Black screen on boot",
+        "Solution": "Check hardware connections and boot in safe mode"
+    },
+    {
+        "Id": 27,
+        "Description": "Software license expired",
+        "Solution": "Renew license or contact software vendor"
+    },
+    {
+        "Id": 28,
+        "Description": "External hard drive not detected",
+        "Solution": "Try different USB port and check disk management"
+    },
+    {
+        "Id": 29,
+        "Description": "Unable to install updates",
+        "Solution": "Clear update cache and restart update service"
+    },
+    {
+        "Id": 30,
+        "Description": "Firewall blocking application",
+        "Solution": "Add application to firewall exceptions"
+    },
+    {
+        "Id": 31,
+        "Description": "Slow file transfer speeds",
+        "Solution": "Check network congestion and try wired connection"
+    },
+    {
+        "Id": 32,
+        "Description": "Browser crashes frequently",
+        "Solution": "Clear cache and disable problematic extensions"
+    },
+    {
+        "Id": 33,
+        "Description": "Email account hacked",
+        "Solution": "Reset password and enable two-factor authentication"
+    },
+    {
+        "Id": 34,
+        "Description": "Cannot access company intranet",
+        "Solution": "Check VPN connection and firewall settings"
+    },
+    {
+        "Id": 35,
+        "Description": "Laptop battery drains quickly",
+        "Solution": "Adjust power settings and check battery health"
+    },
+    {
+        "Id": 36,
+        "Description": "Unable to print in color",
+        "Solution": "Check printer color settings and cartridge levels"
+    },
+    {
+        "Id": 37,
+        "Description": "USB device not recognized",
+        "Solution": "Update USB drivers and try different cable"
+    },
+    {
+        "Id": 38,
+        "Description": "Unable to open Excel files",
+        "Solution": "Repair Office installation or reinstall Excel"
+    },
+    {
+        "Id": 39,
+        "Description": "Touchscreen not responsive",
+        "Solution": "Calibrate touchscreen and update drivers"
+    },
+    {
+        "Id": 40,
+        "Description": "Slow WiFi speeds",
+        "Solution": "Check router settings and reduce interference"
+    },
+    {
+        "Id": 41,
+        "Description": "Corrupted user profile",
+        "Solution": "Create a new profile and migrate data"
+    },
+    {
+        "Id": 42,
+        "Description": "System freezes randomly",
+        "Solution": "Check for hardware issues and update drivers"
+    },
+    {
+        "Id": 43,
+        "Description": "Cannot connect Bluetooth devices",
+        "Solution": "Restart Bluetooth service and update drivers"
+    },
+    {
+        "Id": 44,
+        "Description": "Email stuck in outbox",
+        "Solution": "Check SMTP settings and resend email"
+    },
+    {
+        "Id": 45,
+        "Description": "Word document won't save",
+        "Solution": "Check file permissions and available disk space"
+    },
+    {
+        "Id": 46,
+        "Description": "VPN disconnects frequently",
+        "Solution": "Check network stability and VPN client updates"
+    },
+    {
+        "Id": 47,
+        "Description": "Duplicate files on server",
+        "Solution": "Run deduplication tools and review backup policies"
+    },
+    {
+        "Id": 48,
+        "Description": "Can�t install antivirus software",
+        "Solution": "Check system compatibility and uninstall conflicting programs"
+    },
+    {
+        "Id": 49,
+        "Description": "Password reset emails not received",
+        "Solution": "Check spam folder and email server settings"
+    },
+    {
+        "Id": 50,
+        "Description": "Cannot access remote desktop",
+        "Solution": "Verify remote settings and firewall rules"
+    },
+    {
+        "Id": 51,
+        "Description": "Monitor displaying 'No Signal'",
+        "Solution": "Check cable connections and input source"
+    },
+    {
+        "Id": 52,
+        "Description": "Error code 404 on internal site",
+        "Solution": "Check server status and URL correctness"
+    },
+    {
+        "Id": 53,
+        "Description": "Laptop keyboard backlight not working",
+        "Solution": "Enable keyboard backlight in settings"
+    },
+    {
+        "Id": 54,
+        "Description": "Unable to connect to database",
+        "Solution": "Check connection string and database server"
+    },
+    {
+        "Id": 55,
+        "Description": "Cannot install printer drivers",
+        "Solution": "Download latest drivers from manufacturer"
+    },
+    {
+        "Id": 56,
+        "Description": "File sharing permissions not working",
+        "Solution": "Review folder permissions and network sharing settings"
+    },
+    {
+        "Id": 57,
+        "Description": "Blue screen error 0x0000007B",
+        "Solution": "Check hardware drivers and BIOS settings"
+    },
+    {
+        "Id": 58,
+        "Description": "Touchpad not working",
+        "Solution": "Enable touchpad in settings and update drivers"
+    },
+    {
+        "Id": 59,
+        "Description": "Slow application loading",
+        "Solution": "Clear application cache and update software"
+    },
+    {
+        "Id": 60,
+        "Description": "Cannot connect to WiFi on Mac",
+        "Solution": "Reset network settings and restart router"
+    },
+    {
+        "Id": 61,
+        "Description": "Email sync issues on mobile",
+        "Solution": "Remove and re-add email account"
+    },
+    {
+        "Id": 62,
+        "Description": "Power button not responding",
+        "Solution": "Perform hard shutdown and check hardware"
+    },
+    {
+        "Id": 63,
+        "Description": "Cannot uninstall software",
+        "Solution": "Use specialized uninstaller tools"
+    },
+    {
+        "Id": 64,
+        "Description": "VPN client stuck on connecting",
+        "Solution": "Restart VPN service and check firewall"
+    },
+    {
+        "Id": 65,
+        "Description": "External monitor not detected",
+        "Solution": "Update display drivers and check cables"
+    },
+    {
+        "Id": 66,
+        "Description": "Unable to access cloud storage",
+        "Solution": "Check internet connection and cloud service status"
+    },
+    {
+        "Id": 67,
+        "Description": "File downloads fail",
+        "Solution": "Check browser settings and clear cache"
+    },
+    {
+        "Id": 68,
+        "Description": "Keyboard layout incorrect",
+        "Solution": "Change input language and keyboard settings"
+    },
+    {
+        "Id": 69,
+        "Description": "Cannot open PDF files",
+        "Solution": "Reinstall PDF reader software"
+    },
+    {
+        "Id": 70,
+        "Description": "WiFi authentication error",
+        "Solution": "Verify network password and reset router"
+    },
+    {
+        "Id": 71,
+        "Description": "Computer restarts randomly",
+        "Solution": "Check for overheating and malware"
+    },
+    {
+        "Id": 72,
+        "Description": "Application license not recognized",
+        "Solution": "Reactivate license or contact vendor"
+    },
+    {
+        "Id": 73,
+        "Description": "Cannot connect to shared printer",
+        "Solution": "Verify network settings and printer sharing"
+    },
+    {
+        "Id": 74,
+        "Description": "Microphone not working",
+        "Solution": "Check audio input settings and drivers"
+    },
+    {
+        "Id": 75,
+        "Description": "Slow performance on virtual machine",
+        "Solution": "Allocate more resources and update VM software"
+    },
+    {
+        "Id": 76,
+        "Description": "Email attachments blocked",
+        "Solution": "Adjust email security settings"
+    },
+    {
+        "Id": 77,
+        "Description": "Cannot change desktop wallpaper",
+        "Solution": "Check group policy and permissions"
+    },
+    {
+        "Id": 78,
+        "Description": "Laptop camera not detected",
+        "Solution": "Enable camera and update drivers"
+    },
+    {
+        "Id": 79,
+        "Description": "Cannot save files to network drive",
+        "Solution": "Check write permissions and network connection"
+    },
+    {
+        "Id": 80,
+        "Description": "Bluetooth headset audio cuts out",
+        "Solution": "Update Bluetooth drivers and check battery"
+    },
+    {
+        "Id": 81,
+        "Description": "Error 503 Service Unavailable on website",
+        "Solution": "Check server status and restart web services"
+    },
+    {
+        "Id": 82,
+        "Description": "Unable to open shared calendar",
+        "Solution": "Verify calendar permissions and sync settings"
+    },
+    {
+        "Id": 83,
+        "Description": "Slow response in remote desktop",
+        "Solution": "Check network latency and bandwidth"
+    }
+]

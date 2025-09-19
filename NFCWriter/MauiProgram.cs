@@ -19,6 +19,7 @@ namespace NFCWriter
 
             // Add device-specific services used by the NFCWriter.Shared project
             builder.Services.AddSingleton<IFormFactor, FormFactor>();
+            builder.Services.AddSingleton(new HttpClient());
 #if ANDROID
             builder.Services.AddSingleton<INfcService, NfcService>();
             builder.Services.AddSingleton<ITagStorageService, TagStorageService>();

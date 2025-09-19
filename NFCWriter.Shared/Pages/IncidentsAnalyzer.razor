@@ -1,0 +1,139 @@
+﻿@page "/incident-analyzer"
+@using NFCWriter.Shared.DTOs
+@using System.Text.Json
+@using Microsoft.Maui.Storage
+@using NFCWriter.Shared.Services
+@using Microsoft.ML
+@using Microsoft.ML.Data
+@inject HttpClient Http
+
+<h3>Incident Similarity Analyzer</h3>
+
+<input @bind="inputDescription" placeholder="Describe your incident..." style="width: 100%;" />
+<button @onclick="AnalyzeIncident" disabled="@(!IsDataLoaded)">Analyze</button>
+
+@if (!IsDataLoaded)
+{
+    <p>Loading incidents...</p>
+}
+
+@if (results != null && results.Count > 0)
+{
+    <h4>Top Similar Incidents:</h4>
+    <ul>
+        @foreach (var r in results)
+        {
+            <li>
+                <strong>@r.Description</strong><br />
+                Solution: @r.Solution<br />
+                Similarity: @r.Similarity:F2
+            </li>
+        }
+    </ul>
+}
+
+@code {
+    private string inputDescription = "";
+    private List<SimilarIncident>? results;
+    private List<Incident> historicalIncidents = new();
+    private bool IsDataLoaded = false;
+
+    private MLContext mlContext = new MLContext();
+    private ITransformer? transformer;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // Load incidents from app package
+            historicalIncidents = await IncidentLoaderService.LoadIncidentsFromAppPackageAsync("incidents.json");
+
+            // Prepare ML.NET transformer for TF-IDF
+            var data = historicalIncidents
+                .Select(inc => new IncidentText { Id = inc.Id, Description = inc.Description })
+                .ToList();
+            var dataView = mlContext.Data.LoadFromEnumerable(data);
+
+            transformer = mlContext.Transforms.Text.FeaturizeText(
+                outputColumnName: "Features",
+                inputColumnName: nameof(IncidentText.Description))
+                .Fit(dataView);
+
+            IsDataLoaded = true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading incidents: {ex}");
+            IsDataLoaded = false;
+        }
+    }
+
+    private void AnalyzeIncident()
+    {
+        if (!IsDataLoaded || historicalIncidents.Count == 0 || transformer == null)
+            return;
+
+        // 1. Transform historical incidents
+        var data = historicalIncidents
+            .Select(inc => new IncidentText { Id = inc.Id, Description = inc.Description })
+            .ToList();
+        var dataView = mlContext.Data.LoadFromEnumerable(data);
+        var featureData = transformer.Transform(dataView);
+
+        var features = mlContext.Data.CreateEnumerable<IncidentFeatures>(featureData, reuseRowObject: false)
+            .Select((f, idx) =>
+            {
+                f.Id = historicalIncidents[idx].Id; // preserve Id
+                return f;
+            })
+            .ToList();
+
+        // 2. Transform user input
+        var userInput = new List<IncidentText> { new IncidentText { Id = 0, Description = inputDescription } };
+        var userDataView = mlContext.Data.LoadFromEnumerable(userInput);
+        var userFeatureData = transformer.Transform(userDataView);
+        var userFeatures = mlContext.Data.CreateEnumerable<IncidentFeatures>(userFeatureData, reuseRowObject: false).First();
+
+        // 3. Compute similarity and pick top 3
+        results = features
+            .Select(f =>
+            {
+                var sim = CosineSimilarity(f.Features, userFeatures.Features);
+                var inc = historicalIncidents.First(i => i.Id == f.Id);
+                return new SimilarIncident(inc.Id, inc.Description, inc.Solution)
+                    {
+                        Similarity = sim
+                    };
+            })
+            .OrderByDescending(r => r.Similarity)
+            .Take(3)
+            .ToList();
+    }
+
+    // Helper classes
+    private class IncidentText
+    {
+        public int Id { get; set; }
+        public string Description { get; set; } = string.Empty;
+    }
+
+    private class IncidentFeatures
+    {
+        [VectorType]
+        public float[] Features { get; set; } = Array.Empty<float>();
+        public int Id { get; set; } // keep the Id for mapping
+    }
+
+    // Cosine similarity helper
+    private static float CosineSimilarity(float[] a, float[] b)
+    {
+        float dot = 0, normA = 0, normB = 0;
+        for (int i = 0; i < a.Length; i++)
+        {
+            dot += a[i] * b[i];
+            normA += a[i] * a[i];
+            normB += b[i] * b[i];
+        }
+        return dot / ((float)Math.Sqrt(normA) * (float)Math.Sqrt(normB));
+    }
+}
