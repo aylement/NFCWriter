@@ -1,0 +1,66 @@
+﻿@page "/bomberman-online"
+@inject IJSRuntime JS
+@inject BombermanHubClient HubClient
+
+<h3 class="text-center">Mini Bomberman 🧨</h3>
+
+<div style="width: 100%; max-width: 400px; margin: auto;">
+    <canvas id="bomberCanvas" width="400" height="400"
+            style="border:1px solid #ccc; width:100%; height:auto;"></canvas>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+            <button @onclick='() => Move("UP")' style="width:60px; height:60px;">⬆️</button>
+            <div style="display: flex; gap:5px;">
+                <button @onclick='() => Move("LEFT")' style="width:60px; height:60px;">⬅️</button>
+                <div style="width:60px; height:60px;"></div>
+                <button @onclick='() => Move("RIGHT")' style="width:60px; height:60px;">➡️</button>
+            </div>
+            <button @onclick='() => Move("DOWN")' style="width:60px; height:60px;">⬇️</button>
+        </div>
+
+        <div style="display: flex; flex-direction: column; justify-content: center;">
+            <button @onclick='PlaceBomb' style="width:60px; height:60px; font-size:24px;">💣</button>
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
+        <button @onclick='ResetGame'
+                style="width: 100px; height: 40px; font-size: 16px; border-radius: 8px;
+                       background-color: #f0f0f0; border: 1px solid #ccc;">
+            Reset
+        </button>
+    </div>
+</div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Connect to SignalR server
+            await HubClient.StartAsync("https://localhost:7178");
+
+            // Init JS game
+            await JS.InvokeVoidAsync("bomberman.init", "https://localhost:7178");
+        }
+    }
+
+    private async Task Move(string direction)
+    {
+        await JS.InvokeVoidAsync("bomberman.move", direction);
+        await HubClient.SendMove(direction);
+    }
+
+    private async Task PlaceBomb()
+    {
+        await JS.InvokeVoidAsync("bomberman.placeBomb");
+        await HubClient.SendBomb();
+    }
+
+    private async Task ResetGame()
+    {
+        await JS.InvokeVoidAsync("bomberman.reset");
+        await HubClient.SendReset();
+    }
+}

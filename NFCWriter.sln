@@ -6,8 +6,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFCWriter", "NFCWriter\NFCW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFCWriter.Shared", "NFCWriter.Shared\NFCWriter.Shared.csproj", "{D2BA78F8-F3BD-4837-91AB-11C040473E6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFCWriter.Web", "NFCWriter.Web\NFCWriter.Web.csproj", "{7B7B00C5-1DD1-45CF-9A86-873A90EDC763}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{D2BA78F8-F3BD-4837-91AB-11C040473E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2BA78F8-F3BD-4837-91AB-11C040473E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2BA78F8-F3BD-4837-91AB-11C040473E6F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B7B00C5-1DD1-45CF-9A86-873A90EDC763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B7B00C5-1DD1-45CF-9A86-873A90EDC763}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B7B00C5-1DD1-45CF-9A86-873A90EDC763}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B7B00C5-1DD1-45CF-9A86-873A90EDC763}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using NFCWriter.Services;
 using NFCWriter.Shared.Interfaces;
-using NFCWriter.Shared.Services;
 
 namespace NFCWriter
 {
@@ -18,8 +16,8 @@ namespace NFCWriter
                 });
 
             // Add device-specific services used by the NFCWriter.Shared project
-            builder.Services.AddSingleton<IFormFactor, FormFactor>();
             builder.Services.AddSingleton(new HttpClient());
+            builder.Services.AddSingleton<BombermanHubClient>();
 #if ANDROID
             builder.Services.AddSingleton<INfcService, NfcService>();
             builder.Services.AddSingleton<ITagStorageService, TagStorageService>();
