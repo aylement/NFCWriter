@@ -6,42 +6,66 @@
 
 <input type="checkbox" title="Navigation menu" class="navbar-toggler" />
 
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+<div class="nav-scrollable">
     <nav class="flex-column">
+
+        <!-- Home -->
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+                <span class="bi bi-house-door-fill-nav-menu"></span> Home
             </NavLink>
         </div>
+
+        <!-- NFC -->
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="NFC">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> NFC
+                <span class="bi bi-plus-square-fill-nav-menu"></span> NFC
             </NavLink>
         </div>
+
+        <!-- Tags -->
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="tags">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Tags
+                <span class="bi bi-plus-square-fill-nav-menu"></span> Tags
             </NavLink>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="NFCUnlock">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> HiddenGame
-            </NavLink>
-        </div>
+
+        <!-- Incidents Analyzer -->
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="incident-analyzer">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Incidents analyzer
+                <span class="bi bi-plus-square-fill-nav-menu"></span> Incidents analyzer
             </NavLink>
         </div>
+
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="flappy">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Flappy birdy
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="bomberman">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Bomberman
-            </NavLink>
+            <a class="nav-link d-flex justify-content-between align-items-center"
+               @onclick="() => showGames = !showGames"
+            @onclick:stopPropagation
+               style="cursor:pointer;">
+                <span class="bi bi-controller"></span> Games
+                <span>@(showGames ? "▼" : "►")</span>
+            </a>
+            @if (showGames)
+            {
+                <div class="nav flex-column ps-3 mt-1">
+                    <NavLink class="nav-link" href="NFCUnlock">
+                        <span class="bi bi-plus-square-fill-nav-menu"></span> HiddenGame
+                    </NavLink>
+                    <NavLink class="nav-link" href="flappy">
+                        <span class="bi bi-plus-square-fill-nav-menu"></span> Flappy Birdy
+                    </NavLink>
+                    <NavLink class="nav-link" href="bomberman">
+                        <span class="bi bi-plus-square-fill-nav-menu"></span> Bomberman
+                    </NavLink>
+                    <NavLink class="nav-link" href="bomberman-online">
+                        <span class="bi bi-plus-square-fill-nav-menu"></span> Bomberman (online????)
+                    </NavLink>
+                </div>
+            }
         </div>
     </nav>
 </div>
+
+@code {
+    private bool showGames = false;
+}
