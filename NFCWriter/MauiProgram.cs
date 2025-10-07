@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using NFCWriter.Shared.Interfaces;
+using Serilog;
 
 namespace NFCWriter
 {
@@ -7,6 +8,15 @@ namespace NFCWriter
     {
         public static MauiApp CreateMauiApp()
         {
+            Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .WriteTo.Console()
+            .WriteTo.Seq("http://localhost:5341")
+            .Enrich.WithThreadId()
+            .Enrich.WithProcessId()
+            .Enrich.WithProperty("App", "MyMauiBlazorApp")
+            .CreateLogger();
+
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
