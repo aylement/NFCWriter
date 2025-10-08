@@ -3,6 +3,7 @@ using Android.Nfc;
 using Android.Nfc.Tech;
 using Serilog;
 using NFCWriter.Shared.Interfaces;
+using System.Diagnostics;
 
 public class NfcService : Java.Lang.Object, INfcService, NfcAdapter.IReaderCallback
 {
@@ -52,6 +53,7 @@ public class NfcService : Java.Lang.Object, INfcService, NfcAdapter.IReaderCallb
 
     public void OnTagDiscovered(Tag tag)
     {
+        var stopwatch = Stopwatch.StartNew();
         try
         {
             var id = BitConverter.ToString(tag.GetId()).Replace("-", "");
@@ -84,6 +86,11 @@ public class NfcService : Java.Lang.Object, INfcService, NfcAdapter.IReaderCallb
         {
             Log.Error(ex, "Erreur lors de la lecture du tag NFC.");
             TagRead?.Invoke(this, $"Error reading tag: {ex.Message}");
+        }
+        finally
+        {
+            stopwatch.Stop();
+            Log.Information("Temps total de lecture du tag : {ElapsedMilliseconds} ms", stopwatch.ElapsedMilliseconds);
         }
     }
 }
