@@ -22,8 +22,6 @@
 @code {
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        Log.Information("Hello depuis .NET MAUI !");
-        Log.Warning("Attention, ceci est un test de log !");
         if (firstRender)
         {
             await JS.InvokeVoidAsync("flappy.init");
