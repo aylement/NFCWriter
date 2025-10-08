@@ -36,15 +36,6 @@ public class BombermanHubClient : IAsyncDisposable
             await _js.InvokeVoidAsync("bomberman.reset");
         });
 
-        try
-        {
-            await _hubConnection.StartAsync();
-
-        }
-        catch(Exception e)
-        {
-            string stinki = e.Message;
-        }
         await _hubConnection.StartAsync();
     }
 
