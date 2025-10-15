@@ -7,8 +7,8 @@ using System.Diagnostics;
 
 public class NfcService : Java.Lang.Object, INfcService, NfcAdapter.IReaderCallback
 {
-    private NfcAdapter _adapter;
-    public event EventHandler<string> TagRead;
+    private NfcAdapter? _adapter;
+    public event EventHandler<string>? TagRead;
 
     public void StartListening()
     {
@@ -51,12 +51,23 @@ public class NfcService : Java.Lang.Object, INfcService, NfcAdapter.IReaderCallb
         }
     }
 
-    public void OnTagDiscovered(Tag tag)
+    public void OnTagDiscovered(Tag? tag)
     {
+        if(tag == null)
+        {
+            Log.Warning("Tag NFC découvert est null.");
+            return;
+        }
         var stopwatch = Stopwatch.StartNew();
         try
         {
-            var id = BitConverter.ToString(tag.GetId()).Replace("-", "");
+            byte[]? tagId = tag.GetId();
+            if(tagId == null || tagId.Length == 0)
+            {
+                Log.Warning("Tag NFC découvert avec un ID invalide.");
+                return;
+            }
+            var id = Convert.ToHexString(tagId);
             Log.Information("Tag détecté : {TagId}", id);
             TagRead?.Invoke(this, $"Tag UID: {id}");
 
@@ -66,10 +77,16 @@ public class NfcService : Java.Lang.Object, INfcService, NfcAdapter.IReaderCallb
                 ndef.Connect();
                 Log.Debug("Connexion au tag NFC réussie.");
 
-                var message = ndef.NdefMessage;
-                foreach (var record in message.GetRecords())
+                NdefMessage? message = ndef.NdefMessage;
+                foreach (NdefRecord record in message?.GetRecords() ?? Enumerable.Empty<NdefRecord>())
                 {
-                    var payload = System.Text.Encoding.UTF8.GetString(record.GetPayload());
+                    byte[]? recordPayload = record.GetPayload();
+                    if(recordPayload == null || recordPayload.Length == 0)
+                    {
+                        Log.Warning("Enregistrement NDEF avec une charge utile vide.");
+                        continue;
+                    }
+                    string? payload = System.Text.Encoding.UTF8.GetString(recordPayload);
                     Log.Information("Payload lu depuis le tag : {Payload}", payload);
                     TagRead?.Invoke(this, $"Payload: {payload}");
                 }
